@@ -7,6 +7,18 @@
 
 import UIKit
 
+extension String {
+    ///去掉空格之后是否还是空白的
+    var isBlank:Bool {
+        ///字符串替换
+        self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+}
+
+extension Optional where Wrapped == String {
+    var unwrappedText: String { self ?? ""}
+}
+
 extension UITextField {
     var unwrappedText:String {text ?? ""}
 }

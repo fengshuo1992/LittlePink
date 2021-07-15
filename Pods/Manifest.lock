@@ -1,4 +1,9 @@
 PODS:
+  - AMapFoundation (1.6.7)
+  - AMapLocation (2.6.8):
+    - AMapFoundation (~> 1.6.4)
+  - AMapSearch (7.9.0):
+    - AMapFoundation (~> 1.6.6)
   - CHTCollectionViewWaterfallLayout/Swift (0.9.8)
   - JXSegmentedView (1.2.7)
   - KMPlaceholderTextView (1.4.0)
@@ -13,6 +18,8 @@ PODS:
     - SteviaLayout (~> 4.7.3)
 
 DEPENDENCIES:
+  - AMapLocation
+  - AMapSearch
   - CHTCollectionViewWaterfallLayout/Swift
   - JXSegmentedView
   - KMPlaceholderTextView (~> 1.4.0)
@@ -24,6 +31,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AMapFoundation
+    - AMapLocation
+    - AMapSearch
     - CHTCollectionViewWaterfallLayout
     - JXSegmentedView
     - KMPlaceholderTextView
@@ -36,6 +46,9 @@ SPEC REPOS:
     - YPImagePicker
 
 SPEC CHECKSUMS:
+  AMapFoundation: c7da72b42a713f1429c88af1858d623dde88934b
+  AMapLocation: dad27669c4ca68e395ce7532ff614b7d4d45f7b7
+  AMapSearch: 94cff5f6ab7233c1639111e486861ac2acea6d4b
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
@@ -47,6 +60,6 @@ SPEC CHECKSUMS:
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: e6d1b6d27ab26e1c48b79706489e9611b45c1458
+PODFILE CHECKSUM: e01863ac4fd522e9e61b3db18ec0777fe6d22139
 
 COCOAPODS: 1.10.1

@@ -8,38 +8,26 @@
 import UIKit
 import KMPlaceholderTextView
 
-
 class DynamicSendViewController: UIViewController {
+    let locationManager = CLLocationManager()
     var photos: [UIImage] = [UIImage(named: "1")!, UIImage(named: "2")!];
     var photoCount : Int {photos.count }
     var videoUrl:URL  = URL(fileURLWithPath: Bundle.main.path(forResource: "testVideo", ofType: "mp4")!)
     var isVideo:Bool {videoUrl != nil}
+    var subChannle:String = ""
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var iconButton: UIButton!
+    @IBOutlet weak var subChannleLabel: UILabel!
     
+    @IBOutlet weak var subChannleStackView: UIStackView!
+    @IBOutlet weak var topicLabel: UILabel!
     @IBOutlet weak var textView: KMPlaceholderTextView!
     @IBOutlet weak var titleCountLabel: UILabel!
     @IBOutlet weak var titleTextFiled: UITextField!
+    var textViewIAView: LPInputAccView{textView.inputAccessoryView as! LPInputAccView}
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dragInteractionEnabled = true
-        dismissWhenTapView()
-        let padding = textView.textContainer.lineFragmentPadding
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: -padding, bottom: 0, right: -padding)
-//        textView.textContainer.lineFragmentPadding = 0
-        let paragraphStyle = NSMutableParagraphStyle()
-        ///这个是 行高的倍数
-//        paragraphStyle.lineHeightMultiple = 2;
-        ///这个是行间距
-        paragraphStyle.lineSpacing = 8;
-        let typingAttributes : [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 14),
-            .backgroundColor: UIColor.secondaryLabel,
-            .paragraphStyle : paragraphStyle
-        ]
-            
-        
-        textView.typingAttributes =  typingAttributes
-        textView.tintColorDidChange()
+      config()
     }
     
     
@@ -68,5 +56,27 @@ class DynamicSendViewController: UIViewController {
         titleCountLabel.isHidden = true
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let channleVC = segue.destination as? ChannleViewController {
+            channleVC.channleDelegate = self
+        }
+    }
+    
 }
 
+extension DynamicSendViewController:ChannleVCDelegate {
+    func didSelectChannle(channle: String, subChannle: String) {
+        self.subChannle = subChannle
+        self.iconButton.tintColor = .blue
+        self.topicLabel.text = self.subChannle
+        self.topicLabel.textColor = .blue
+        self.subChannleLabel.isHidden = true
+    }
+}
+
+extension DynamicSendViewController:UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard textView.markedTextRange == nil else {return}
+        textViewIAView.currentCount = textView.text.count
+    }
+}
